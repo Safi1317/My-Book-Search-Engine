@@ -79,7 +79,7 @@ const SearchBooks = () => {
     try {
       console.log(bookToSave)
       const response = await saveBook({
-        variables: { newBook: { ...bookToSave } }
+        variables: {bookData: { ...bookToSave } }
       });
 
       if (!response.ok) {
