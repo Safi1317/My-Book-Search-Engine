@@ -26,7 +26,7 @@ type Book {
   link: String
 }
 
-BookInput savedBook {
+input BookInput {
   description: String!
   title: String
   bookId: String!
