@@ -22,7 +22,7 @@ const SavedBooks = () => {
   const [removeBook, { error }] = useMutation(REMOVE_BOOK)
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+
   // const [removeBook, { error }] = useMutation(REMOVE_BOOK)
 
 
@@ -31,6 +31,7 @@ const SavedBooks = () => {
 
   // })
   const userData = data?.me || [];
+  const userDataLength = Object.keys(userData).length;
 
 
   // useEffect(() => {
