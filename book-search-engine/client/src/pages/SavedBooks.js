@@ -10,12 +10,12 @@ import { QUERY_ME } from "../utils/queries"
 // import { getMe} from '../utils/API';
 import { REMOVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeBookId, saveBookIds } from '../utils/localStorage';
 import { useMutation } from "@apollo/client";
 import { useQuery } from '@apollo/client';
 
 const SavedBooks = () => {
-  // const [userData, setUserData] = useState({});
+
   const { loading, data } = useQuery(QUERY_ME, {
     fetchPolicy: "no-cache"
   })
@@ -46,11 +46,13 @@ const SavedBooks = () => {
       console.error(err);
     }
   };
-  const userDataLength = Object.keys(userData).length;
+  // const userDataLength = Object.keys(userData).length;
   // for when data isn't here yet
-  if (!userDataLength) {
+  if (loading) {
     return <h2>LOADING...</h2>;
   }
+ const savedBookId= userData.savedBooks.map((book) => book.bookId);
+ saveBookIds(savedBookId);
 
   return (
     <>
