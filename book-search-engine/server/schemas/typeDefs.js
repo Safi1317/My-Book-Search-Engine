@@ -18,7 +18,6 @@ type User {
 
 type Book {
   _id: ID!
-  bookData: BookInput!
   bookId: String
   authors: [String]
   description: String
