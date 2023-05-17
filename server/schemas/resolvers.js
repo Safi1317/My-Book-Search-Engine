@@ -8,10 +8,10 @@ const resolvers = {
         const userData = await User
           .findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate(books)
+        
         return userData
       }
-      throw newAuthenticationError("You must be logged in!")
+      throw new AuthenticationError("You must be logged in!")
     },
 
   },
@@ -42,12 +42,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, args, context) => {
+    saveBook: async (parent, {bookData}, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
 
-          { $addToSet: { savedBooks: args.input } },
+          { $addToSet: { savedBooks: bookData.input } },
           { new: true, runValidators: true }
         );
 

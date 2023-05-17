@@ -16,9 +16,7 @@ import { useQuery } from '@apollo/client';
 
 const SavedBooks = () => {
 
-  const { loading, data } = useQuery(QUERY_ME, {
-    fetchPolicy: "no-cache"
-  })
+  const { loading, data } = useQuery(QUERY_ME)
   const [removeBook, { error }] = useMutation(REMOVE_BOOK)
 
   const userData = data?.me || [];
@@ -34,12 +32,12 @@ const SavedBooks = () => {
     }
 
     try {
-      const { user } = await removeBook({
+      const { data } = await removeBook({
         variables: {
           bookId: bookId
         }
       });
-      userData = user;
+      // userData = user;
 
       removeBookId(bookId);
     } catch (err) {
@@ -51,8 +49,7 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
- const savedBookId= userData.savedBooks.map((book) => book.bookId);
- saveBookIds(savedBookId);
+
 
   return (
     <>
